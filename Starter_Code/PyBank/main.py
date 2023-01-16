@@ -15,12 +15,11 @@ import os
 import csv
 
 abs_path = os.path.dirname(__file__)
-file = os.path.join("Resources/budget_data.csv")
+file = os.path.join(abs_path, "Resources", "budget_data.csv")
 
 with open(file) as csv_file:
     csv_reader = csv.reader(csv_file)
     months = 0
     for budget in csv_reader:
-        months += csv_reader[budget]
+        print(budget)
 
-print(months)
