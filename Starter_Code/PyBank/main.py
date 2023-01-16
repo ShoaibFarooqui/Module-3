@@ -21,10 +21,12 @@ file = os.path.join(abs_path, "Resources", "budget_data.csv")
 with open(file) as csv_file:
     csv_reader = csv.reader(csv_file)
     header = next(csv_reader)
+    month_counter = []
     for budget in csv_reader:
         date = budget[0]
         money = budget[1]
         month = date.split("-")[0]
         day = date.split("-")[1]
-        print(f'{month} and {day} and {money}')
-
+        month_counter.append(month)
+    total_months = len(month_counter)
+    print(total_months)
