@@ -24,5 +24,7 @@ with open(file) as csv_file:
     for budget in csv_reader:
         date = budget[0]
         money = budget[1]
-        print(f'{date} and {money}')
+        month = date.split("-")[0]
+        day = date.split("-")[1]
+        print(f'{month} and {day} and {money}')
 
