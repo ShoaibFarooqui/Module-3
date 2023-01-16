@@ -17,9 +17,12 @@ import csv
 abs_path = os.path.dirname(__file__)
 file = os.path.join(abs_path, "Resources", "budget_data.csv")
 
+#header = Date, Gain/Loss
 with open(file) as csv_file:
     csv_reader = csv.reader(csv_file)
-    months = 0
+    header = next(csv_reader)
     for budget in csv_reader:
-        print(budget)
+        date = budget[0]
+        money = budget[1]
+        print(f'{date} and {money}')
 
