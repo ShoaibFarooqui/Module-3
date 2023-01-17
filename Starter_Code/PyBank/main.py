@@ -31,7 +31,7 @@ with open(file) as csv_file:
     for budget in csv_reader:
         date = budget[0]
         month_counter.append(date)
-        
+
         money = int(budget[1])
         revenue += money
         #calculate change in profit/loss
@@ -44,6 +44,6 @@ with open(file) as csv_file:
     total_months = len(month_counter)
     avg_change = st.mean(change_ls)
     print(f'Period is {total_months} months')
-    print(f'Net Total is ${revenue}.00')    
-    print(f'Changes in Profit/Loss over the entire period: ${change_ls}')
+    print(f'Net Total is ${revenue}.00')
+    print(f'Changes in Profit/Loss over the entire period: ${sum(change_ls)}')
     print(f'Average of all Profit/Loss changes: ${avg_change}')
