@@ -25,6 +25,7 @@ with open(relative_path) as csv_file:
     for row in csv_reader:
         vote = row[2]
         total_vote.append(vote)
+        #counting votes for each candidate
         if vote in results:
             results[vote] += 1
         else:
@@ -32,22 +33,18 @@ with open(relative_path) as csv_file:
     
     vote_count = len(total_vote)
 
-    candidates = set(total_vote)
-
-
-    # podium = {}
-    # for candidate in candidates:
-
-
+    #sorted() seemed to be the only feasible way to order the dictionary "results" by the values rather than keys
+    podium = sorted(results.items(), key=lambda x:x[1], reverse=True)
+    print(podium)
 
     election = f'''
     Election Results
     ----------------------------------
     Total Votes: {vote_count}
     ----------------------------------
-    Candidates: {results}
-    --
-
+    Candidates: {podium}
+    ----------------------------------
+    Winner: {podium[0]}
     '''
 
 print(election)
