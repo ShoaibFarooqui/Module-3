@@ -13,30 +13,33 @@ with open(file) as csv_file:
     month_counter = []
     change_ls = []
     net = 0
-    ci = 1088983
+    change_initial = 1088983
     for financial_reporting in csv_reader:
         date = financial_reporting[0]
         month_counter.append(date)
         
-        cf = int(financial_reporting[1])
-        net += cf
+        change_final = int(financial_reporting[1])
+        net += change_final
 
-        change = cf - ci
-        ci = cf
+        change = change_final - change_initial
+        change_initial = change_final
         change_ls.append(change)
     
 
     total_months = len(month_counter)
     change_ls.remove(change_ls[0])
+
     avg_change = st.mean(change_ls)
 
     results = f'''
     Total Months: {total_months}
     Total: ${net}.00
     Average Changes: ${round(avg_change, 2)}
-    Greatest increase in profits: {month_counter[change_ls.index(max(change_ls))]} (${max(change_ls)}.00)
-    Greatest decrease in profits: {month_counter[change_ls.index(min(change_ls))]} (${min(change_ls)}.00)
+    Greatest increase in profits: {month_counter[(change_ls.index(max(change_ls)))+1]} (${max(change_ls)}.00)
+    Greatest decrease in profits: {month_counter[change_ls.index(min(change_ls))+1]} (${min(change_ls)}.00)
     '''
 
 print(results)
-    
+with open("Starter_Code/analysis/PyBank_Output.txt", 'w') as out:
+    out.write(results)
+
