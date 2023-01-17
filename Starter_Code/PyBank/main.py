@@ -23,23 +23,18 @@ with open(file) as csv_file:
     csv_reader = csv.reader(csv_file)
     header = next(csv_reader)
     month_counter = []
-    change = []
+    profit = []
     revenue = 0
     for budget in csv_reader:
         date = budget[0]
+        month_counter.append(date)
+
         money = int(budget[1])
-
-        month = date.split("-")[0]
-        day = date.split("-")[1]
-        month_counter.append(month)
-
         revenue += money
-        change.append(money)
     
     #calculating average change (assuming no numpy package allowed)
-    mean_change = st.mean(change)
+    mean_change = st.mean(profit)
 
     total_months = len(month_counter)
     print(f'{total_months} months')
     print(f'${revenue}.00')
-    print(mean_change)
