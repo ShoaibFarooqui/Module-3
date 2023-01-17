@@ -19,30 +19,38 @@ with open(relative_path) as csv_file:
     csv_reader = csv.reader(csv_file)
     header = next(csv_reader)
 
-    total_id = []
-    total_county = []
     total_vote = []
+    results = {}
 
     for row in csv_reader:
-        id = row[0]
-        county = row[1]
         vote = row[2]
-        
         total_vote.append(vote)
+        if vote in results:
+            results[vote] += 1
+        else:
+            results[vote] = 1
     
     vote_count = len(total_vote)
-    candidates = set(total_vote) 
+
+    candidates = set(total_vote)
 
 
-    results = f'''
+    # podium = {}
+    # for candidate in candidates:
+
+
+
+    election = f'''
     Election Results
     ----------------------------------
     Total Votes: {vote_count}
     ----------------------------------
-    Candidates: {candidates}
+    Candidates: {results}
+    --
+
     '''
 
-print(results)
+print(election)
 
 '''
 Election Results
