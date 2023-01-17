@@ -31,8 +31,15 @@ with open(relative_path) as csv_file:
         total_vote.append(vote)
     
     vote_count = len(total_vote)
-    print(vote_count)
 
+    results = f'''
+    Election Results
+    ----------------------------------
+    Total Votes: {vote_count}
+    ----------------------------------
+    '''
+    
+print(results)
 
 '''
 Election Results
