@@ -31,14 +31,17 @@ with open(relative_path) as csv_file:
         total_vote.append(vote)
     
     vote_count = len(total_vote)
+    candidates = set(total_vote) 
+
 
     results = f'''
     Election Results
     ----------------------------------
     Total Votes: {vote_count}
     ----------------------------------
+    Candidates: {candidates}
     '''
-    
+
 print(results)
 
 '''
