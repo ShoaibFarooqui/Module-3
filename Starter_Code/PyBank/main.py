@@ -1,16 +1,3 @@
-'''
-#The total number of months included in the dataset
-
-#The net total amount of "Profit/Losses" over the entire period
-
-The changes in "Profit/Losses" over the entire period, and then the average of those changes
-
-The greatest increase in profits (date and amount) over the entire period
-
-The greatest decrease in profits (date and amount) over the entire period
-
-Your analysis should align with the following results:
-'''
 import os
 import csv
 import statistics as st
@@ -42,14 +29,12 @@ with open(file) as csv_file:
         
     #calculating average change (assuming no numpy package allowed
     total_months = len(month_counter)
-
-    print(f'Total Months: {total_months}')
-    print(f'Total: ${net}.00')    
-
     avg_change = st.mean(change_ls)
-    #print(f'Changes in Profit/Loss over the entire period: ${change_ls}')
-    print(f'Average Changes: ${avg_change}')
 
-    #greatest increase/decrease
-    print(f'Greatest increase in profits: {month_counter[change_ls.index(max(change_ls))]} (${max(change_ls)})')
-    print(f'Greatest decrease in profits: {month_counter[change_ls.index(min(change_ls))]} (${min(change_ls)})')
+    print(f'''
+    Total Months: {total_months}
+    Total: ${net}.00
+    Average Changes: ${avg_change}
+    Greatest increase in profits: {month_counter[change_ls.index(max(change_ls))]} (${max(change_ls)})
+    Greatest decrease in profits: {month_counter[change_ls.index(min(change_ls))]} (${min(change_ls)})
+    ''')
