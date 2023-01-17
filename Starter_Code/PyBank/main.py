@@ -22,11 +22,17 @@ with open(file) as csv_file:
     csv_reader = csv.reader(csv_file)
     header = next(csv_reader)
     month_counter = []
+    revenue = 0
     for budget in csv_reader:
         date = budget[0]
         money = budget[1]
+
         month = date.split("-")[0]
         day = date.split("-")[1]
         month_counter.append(month)
+
+        revenue += int(money)
+
     total_months = len(month_counter)
-    print(total_months)
+    print(f'{total_months} months')
+    print(f'${revenue}.00')
