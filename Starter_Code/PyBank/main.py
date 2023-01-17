@@ -13,7 +13,6 @@ Your analysis should align with the following results:
 '''
 import os
 import csv
-import statistics as st
 
 abs_path = os.path.dirname(__file__)
 file = os.path.join(abs_path, "Resources", "budget_data.csv")
@@ -33,7 +32,6 @@ with open(file) as csv_file:
         revenue += money
     
     #calculating average change (assuming no numpy package allowed)
-    mean_change = st.mean(profit)
 
     total_months = len(month_counter)
     print(f'{total_months} months')
