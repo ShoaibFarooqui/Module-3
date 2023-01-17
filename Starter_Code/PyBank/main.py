@@ -25,25 +25,24 @@ with open(file) as csv_file:
 
     month_counter = []
     change_ls = []
-    revenue = 0
-    initial_money = 0
+    net = 0
+    last_month_profit = 0
 
-    for budget in csv_reader:
-        date = budget[0]
+    for financial_reporting in csv_reader:
+        date = financial_reporting[0]
         month_counter.append(date)
         
-        money = int(budget[1])
-        revenue += money
-        #calculate change in profit/loss
-        change = money - initial_money
-        initial_money = money
+        current_month_profit = int(financial_reporting[1])
+        net += current_month_profit
+        #calculate change in profit/loss each entry 
+        change = current_month_profit - last_month_profit
+        last_month_profit = current_month_profit
         change_ls.append(change)
-
-    
+        
     #calculating average change (assuming no numpy package allowed
     total_months = len(month_counter)
     avg_change = st.mean(change_ls)
     print(f'Period is {total_months} months')
-    print(f'Net Total is ${revenue}.00')    
+    print(f'Net Total is ${net}.00')    
     print(f'Changes in Profit/Loss over the entire period: ${change_ls}')
     print(f'Average of all Profit/Loss changes: ${avg_change}')
