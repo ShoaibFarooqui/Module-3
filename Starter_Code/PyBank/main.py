@@ -13,28 +13,29 @@ with open(file) as csv_file:
     month_counter = []
     change_ls = []
     net = 0
-    last_month_profit = 0
-
+    ci = 1088983
     for financial_reporting in csv_reader:
         date = financial_reporting[0]
         month_counter.append(date)
         
-        current_month_profit = int(financial_reporting[1])
-        net += current_month_profit
+        cf = int(financial_reporting[1])
+        net += cf
 
-        change = current_month_profit - last_month_profit
-        last_month_profit = current_month_profit
+        change = cf - ci
+        ci = cf
         change_ls.append(change)
-        
+    
+
     total_months = len(month_counter)
+    change_ls.remove(change_ls[0])
     avg_change = st.mean(change_ls)
 
     results = f'''
     Total Months: {total_months}
     Total: ${net}.00
-    Average Changes: ${avg_change}
-    Greatest increase in profits: {month_counter[change_ls.index(max(change_ls))]} (${max(change_ls)})
-    Greatest decrease in profits: {month_counter[change_ls.index(min(change_ls))]} (${min(change_ls)})
+    Average Changes: ${round(avg_change, 2)}
+    Greatest increase in profits: {month_counter[change_ls.index(max(change_ls))]} (${max(change_ls)}.00)
+    Greatest decrease in profits: {month_counter[change_ls.index(min(change_ls))]} (${min(change_ls)}.00)
     '''
 
 print(results)
