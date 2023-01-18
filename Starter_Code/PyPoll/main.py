@@ -21,6 +21,7 @@ with open(relative_path) as csv_file:
 
     total_vote = []
     results = {}
+    percentages = []
 
     for row in csv_reader:
         vote = row[2]
@@ -30,23 +31,24 @@ with open(relative_path) as csv_file:
             results[vote] += 1
         else:
             results[vote] = 1
+
     
     vote_count = len(total_vote)
 
+
+
     #sorted() seemed to be the only feasible way to order the dictionary "results" by the values rather than keys
     podium = sorted(results.items(), key=lambda x:x[1], reverse=True)
-    print(podium)
-
+   # number_of_votes_received = count[1] for count in podium
     election = f'''
     Election Results
     ----------------------------------
     Total Votes: {vote_count}
     ----------------------------------
-    Candidates: {podium}
+    Candidates: {podium} with {[count[1]/vote_count*100 for count in podium]}%, respectively
     ----------------------------------
-    Winner: {podium[0]}
+    Winner: {podium[0][0]} with {round((podium[0][1])/vote_count*100, 3)}% of the vote for a total of {podium[0][1]} votes!
     '''
-
 print(election)
 
 '''
