@@ -40,12 +40,17 @@ with open(relative_path) as csv_file:
     #sorted() seemed to be the only feasible way to order the dictionary "results" by the values rather than keys
     podium = sorted(results.items(), key=lambda x:x[1], reverse=True)
    # number_of_votes_received = count[1] for count in podium
+   # podium is a list of tuples containing name and votes received
+
     election = f'''
     Election Results
     ----------------------------------
     Total Votes: {vote_count}
     ----------------------------------
-    Candidates: {podium} with {[count[1]/vote_count*100 for count in podium]}%, respectively
+    Candidates: 
+    {podium[0][0]} with {round((podium[0][1])/vote_count*100, 3)}% ({podium[0][1]} votes)
+    {podium[1][0]} with {round((podium[1][1])/vote_count*100, 3)}% ({podium[1][1]} votes)
+    {podium[2][0]} with {round((podium[2][1])/vote_count*100, 3)}% ({podium[2][1]} votes)
     ----------------------------------
     Winner: {podium[0][0]} with {round((podium[0][1])/vote_count*100, 3)}% of the vote for a total of {podium[0][1]} votes!
     '''
