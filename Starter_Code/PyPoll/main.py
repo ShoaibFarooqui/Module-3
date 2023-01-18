@@ -1,14 +1,3 @@
-'''
-The total number of votes cast
-
-A complete list of candidates who received votes
-
-The percentage of votes each candidate won
-
-The total number of votes each candidate won
-
-The winner of the election based on popular vote'''
-
 import os
 import csv
 
@@ -21,7 +10,6 @@ with open(relative_path) as csv_file:
 
     total_vote = []
     results = {}
-    percentages = []
 
     for row in csv_reader:
         vote = row[2]
@@ -32,15 +20,11 @@ with open(relative_path) as csv_file:
         else:
             results[vote] = 1
 
-    
     vote_count = len(total_vote)
 
-
-
-    #sorted() seemed to be the only feasible way to order the dictionary "results" by the values rather than keys
+    #sorted() seemed to be the only feasible way to order the dictionary by the values rather than keys, calling lambda function
     podium = sorted(results.items(), key=lambda x:x[1], reverse=True)
-   # number_of_votes_received = count[1] for count in podium
-   # podium is a list of tuples containing name and votes received
+    #podium is a list of tuples containing name and votes received in descending order (podium[0] is winner)
 
     election = f'''
     Election Results
@@ -54,17 +38,8 @@ with open(relative_path) as csv_file:
     ----------------------------------
     Winner: {podium[0][0]} with {round((podium[0][1])/vote_count*100, 3)}% of the vote for a total of {podium[0][1]} votes!
     '''
+
 print(election)
 
-'''
-Election Results
--------------------------
-Total Votes: 369711
--------------------------
-Charles Casper Stockham: 23.049% (85213)
-Diana DeGette: 73.812% (272892)
-Raymon Anthony Doane: 3.139% (11606)
--------------------------
-Winner: Diana DeGette
--------------------------
-'''
+with open("Starter_Code/analysis/PyPoll_Output.txt", 'w') as out:
+    out.write(election)
